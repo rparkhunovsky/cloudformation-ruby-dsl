@@ -110,16 +110,25 @@ class TemplateDSL < JsonObjectDSL
     contents
   end
 
+  # Find tags where the specified attribute is true then remove this attribute.
+  def excise_tag_attribute!(tags, attribute)
+    marked_tags = []
+    tags.each do |tag, options|
+      if options.delete(attribute.to_sym) or options.delete(attribute.to_s)
+        marked_tags << tag
+      end
+    end
+    marked_tags
+  end
+
   def excise_tags!
     tags = @dict.fetch(:Tags, {})
     @dict.delete(:Tags)
     tags
   end
 
-  def tag(tag)
-    tag.each do | name, value |
-      default(:Tags, {})[name] = value
-    end
+  def tag(name, options)
+      default(:Tags, {})[name] = options
   end
 
   def condition(name, options) default(:Conditions, {})[name] = options end
