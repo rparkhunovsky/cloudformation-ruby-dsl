@@ -89,7 +89,7 @@ Reference a CloudFormation pseudo parameter.
 ### Utility Functions
 
 Additional capabilities for file inclusion, etc.
-- `tag(tag)`: add tags to the stack, which are inherited by all resources in that stack; can only be used at launch
+- `tag(tag_name, tag_options_hash)`: add tags to the stack, which are inherited by all resources in that stack
 - `file(name)`: return the named file as a string, for further use
 - `load_from_file(filename)`: load the named file by a given type; currently handles YAML, JSON, and Ruby
 - `interpolate(string)`: embed CFN references into a string (`{{ref('Service')}}`) for later interpretation by the CFN engine
